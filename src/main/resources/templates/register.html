@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" href="/css/bootstrap.min.css"/>
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+
+    <style>
+        #formDiv {
+            margin-right: 200px;
+            margin-left: 200px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .conv-button {
+            height: 150px;
+            width: 300px;
+        }
+
+    </style>
+    <title>Register</title>
+</head>
+<body>
+<br/>
+<h1 class="cover-heading" align="center"> Register </h1>
+<br/>
+
+<div class="container-my-3">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <form th:action="@{/auth/register}" method="post" th:object="${newUser}">
+                <div class="form-row">
+                    <div class="col-md-6 form-group">
+                        <label for="inputUsername">Username</label>
+                        <input type="text" name="username" class="form-control" id="inputUsername"/>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" name="password" class="form-control" id="inputPassword"/>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>First Name</label>
+                        <input type="text" name="firstName" class="form-control"/>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Last Name</label>
+                        <input type="text" name="lastName" class="form-control"/>
+                    </div>
+                    <!--                    <div class="col-md-6 form-group">-->
+                    <!--                        <label>Email</label>-->
+                    <!--                        <input type="text" name="email" class="form-control"/>-->
+                    <!--                    </div>-->
+                    <div class="col-md-6 form-group">
+                        <label>Phone number</label>
+                        <input type="text" name="phoneNumber" class="form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <input type="submit" class="btn btn-dark" id="saveButton" th:value="Inregistreaza-te">
+                    <span>Already registered? <a href="/" th:href="@{/auth/login}">Login here</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

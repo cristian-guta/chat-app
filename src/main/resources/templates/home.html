@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" href="/css/bootstrap.min.css"/>
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+
+    <style>
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .conv-button {
+            height: 150px;
+            width: 300px;
+        }
+
+        .flex-container {
+            display: flex;
+            width: 100%;
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 5%;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+    </style>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+    <title>HOME</title>
+</head>
+
+<header>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0">
+            <div sec:authentication="name">
+            </div>
+        </a>
+
+        <ul class="navbar-nav px-5">
+            <li class="nav-item text-nowrap">
+                <a style="display: inline" th:text="${user.username}" class="nav-link">${user.username}</a>
+                <a style="display: inline" th:href="@{/auth/logout}" class="nav-link">Logout</a>
+            </li>
+
+        </ul>
+    </nav>
+</header>
+<br>
+<br>
+
+<body>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a>
+        <form style="display: inline" th:action="@{/contacts/addContact}" th:method="get">
+            <button style="border: none; width: 120px; text-align: left" class="btn btn-outline-light">New contact</button>
+        </form>
+        <svg width="1em" fill="white" height="1em" viewBox="0 0 16 16" class="bi bi-person-plus"
+             xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                  d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+        </svg>
+    </a>
+    <a>
+        <form style="display: inline" th:action="@{/user}" th:method="get">
+            <button style="border: none; width: 120px; text-align: left" class="btn btn-outline-light">Edit info</button>
+        </form>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-lines-fill" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </a>
+
+</div>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Actions</span>
+<noscript>
+    <h2>Sorry! Your browser doesn't support Javascript</h2>
+</noscript>
+
+<div class="flex-container align-items-center" style="width: fit-content">
+    <div style="margin-right: 5%;">
+        <table th:if="${not #lists.isEmpty(contacts)}">
+            <br>
+            <tbody>
+            <tr th:each="contact : ${contacts}">
+                <form th:action="@{index.html}" th:method="get">
+                    <button class="conv-button btn btn-light"
+                            th:text="${contact.firstName} + ' ' + ${contact.lastName}"></button>
+                    <br>
+                </form>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="margin-left: 5%">
+        <h3>Tap on a contact to initiate a conversation or create a new contact!</h3>
+    </div>
+</div>
+
+
+</body>
+</html>

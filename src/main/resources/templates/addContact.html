@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" href="/css/bootstrap.min.css"/>
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+
+    <style>
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 3rem;
+        }
+    </style>
+    <title>Add a contact</title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0">
+            <div sec:authentication="name">
+            </div>
+        </a>
+
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a th:href="@{/auth/logout}" class="nav-link">Logout</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<br>
+<br>
+<br/>
+<h1 class="cover-heading" align="center"> Add new contact </h1>
+<br/>
+
+
+<form  th:class="form-group" th:action="@{/contacts/addContact}"
+      th:object="${contact}" method="post">
+
+    <div style="left:40%" class="col-md-6 form-group">
+        <label>First Name</label>
+        <input type="text" th:field="*{firstName}"/>
+    </div>
+    <div style="left:40%" class="col-md-6 form-group">
+        <label>Last Name</label>
+        <input type="text" th:field="*{lastName}"/>
+    </div>
+    <div style="left:40%" class="col-md-6 form-group">
+        <label>Phone number</label>
+        <input type="text" th:field="*{phoneNumber}"/>
+    </div>
+
+    <div style="left:40%" class="col-md-6 form-group">
+        <input type="submit" class="btn btn-dark" id="saveButton" th:value="Save">
+    </div>
+</form>
+
+
+</body>
+</html>
