@@ -2,7 +2,7 @@ package com.chatapp.demo.service;
 
 import com.chatapp.demo.model.Contacts;
 import com.chatapp.demo.model.User;
-import com.chatapp.demo.repository.ContactsRepository;
+import com.chatapp.demo.repository.ContactRepository;
 import com.chatapp.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,12 +15,12 @@ import java.util.List;
 public class ContactService {
 
     public UserRepository userRepository;
-    public ContactsRepository contactsRepository;
+    public ContactRepository contactRepository;
 
     @Autowired
-    public ContactService(UserRepository userRepository, ContactsRepository contactsRepository) {
+    public ContactService(UserRepository userRepository, ContactRepository contactRepository) {
         this.userRepository = userRepository;
-        this.contactsRepository = contactsRepository;
+        this.contactRepository = contactRepository;
     }
 
     public User getCurrentUser() {
@@ -35,6 +35,6 @@ public class ContactService {
         List<Contacts> userContacts = user.getContacts();
         userContacts.add(contact);
         user.setContacts(userContacts);
-        return contactsRepository.save(contact);
+        return contactRepository.save(contact);
     }
 }

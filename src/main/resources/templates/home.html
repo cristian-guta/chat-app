@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
     <script src="webjars/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" href="/css/bootstrap.css"/>
     <link href="../static/css/bootstrap.css" rel="stylesheet">
 
     <style>
+        body {
+            background-color: #dddbd1;
+        }
+
         h1 {
             font-size: 2.5rem;
             margin-top: 3rem;
@@ -18,6 +22,12 @@
         .conv-button {
             height: 150px;
             width: 300px;
+            background-color: white;
+            border-width: 1px;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            text-align: inherit;
         }
 
         .flex-container {
@@ -53,6 +63,7 @@
         .sidenav a:hover {
             color: #f1f1f1;
         }
+
 
         .sidenav .closebtn {
             position: absolute;
@@ -92,11 +103,12 @@
         </a>
 
         <ul class="navbar-nav px-5">
-            <li class="nav-item text-nowrap">
-                <a style="display: inline" th:text="${user.username}" class="nav-link">${user.username}</a>
-                <a style="display: inline" th:href="@{/auth/logout}" class="nav-link">Logout</a>
-            </li>
-
+            <form th:object="${user}">
+                <li class="nav-item text-nowrap">
+                    <!--                    <a style="display: inline" th:text="${user.username}" class="nav-link"></a>-->
+                    <a style="display: inline" th:href="@{/auth/logout}" class="nav-link">Logout</a>
+                </li>
+            </form>
         </ul>
     </nav>
 </header>
@@ -108,7 +120,8 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a>
         <form style="display: inline" th:action="@{/contacts/addContact}" th:method="get">
-            <button style="border: none; width: 120px; text-align: left" class="btn btn-outline-light">New contact</button>
+            <button style="border: none; width: 120px; text-align: left" class="btn btn-outline-light">New contact
+            </button>
         </form>
         <svg width="1em" fill="white" height="1em" viewBox="0 0 16 16" class="bi bi-person-plus"
              xmlns="http://www.w3.org/2000/svg">
@@ -118,10 +131,13 @@
     </a>
     <a>
         <form style="display: inline" th:action="@{/user}" th:method="get">
-            <button style="border: none; width: 120px; text-align: left" class="btn btn-outline-light">Edit info</button>
+            <button style="border: none; width: 120px; text-align: left" class="btn btn-outline-light">Edit info
+            </button>
         </form>
-        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-lines-fill" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-lines-fill" fill="white"
+             xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                  d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
         </svg>
     </a>
 
@@ -132,7 +148,11 @@
 </noscript>
 
 <div class="flex-container align-items-center" style="width: fit-content">
-    <div style="margin-right: 5%;">
+    <div style="margin-right: 5%; ">
+        <form th:action="@{/home/search}" th:object="${contacts}" method="post" class="md-form mt-0" >
+            <input type="text" placeholder="Search" aria-label="Search" style="background-color: inherit; width: 74%" name="searchParam"/>
+            <input type="submit" class="btn btn-light" style="background-color: inherit" value="Search"/>
+        </form>
         <table th:if="${not #lists.isEmpty(contacts)}">
             <br>
             <tbody>

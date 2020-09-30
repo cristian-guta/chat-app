@@ -1,7 +1,6 @@
 package com.chatapp.demo.service;
 
 import com.chatapp.demo.model.User;
-import com.chatapp.demo.repository.ContactsRepository;
 import com.chatapp.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
